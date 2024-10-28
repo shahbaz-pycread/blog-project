@@ -1,0 +1,31 @@
+{% extends 'blog/base_post.html' %}
+{% block title %} {{ post.title }} {% endblock title %}
+{% block content %}
+    
+        
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        
+                        <a href="{% url 'post_detail' post.id %}"><img class="img-fluid" src="{{ post.post_image.url }}" style="height: 400px;" /></a>
+                        <p>{{ post.content|safe }}</p>
+                        
+                        
+                       
+                        <p> Written by <strong>{{ post.author }}</strong> on {{ post.created_at }} 
+                        </p>
+                        <span class="text-muted"><a href="{% url 'category' post.category %}">{{ post.category }}</a></span>
+                        <p>
+                            <span class="text-muted">
+                                {% for tag in post.tags.all %}
+                                    {{ tag.name }}{% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                            </span>        
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </article>
+{% endblock %}
